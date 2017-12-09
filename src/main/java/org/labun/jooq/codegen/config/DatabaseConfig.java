@@ -12,5 +12,10 @@ import java.util.List;
 @Getter
 @Setter
 public class DatabaseConfig {
+    private String username;
+    private String password;
+    private String driverClass;
+    private String dbMetaClass;
+    private String jdbcUrl;
     private List<String> schemas = new ArrayList<>();
 }

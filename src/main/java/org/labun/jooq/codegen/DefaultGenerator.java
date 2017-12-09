@@ -25,19 +25,19 @@ import java.util.stream.Collectors;
 /**
  * @author Konstantin Labun
  */
-public class JavaGenerator implements Generator {
-    private static final JooqLogger LOG = JooqLogger.getLogger(JavaGenerator.class);
+public class DefaultGenerator implements Generator {
+    private static final JooqLogger LOG = JooqLogger.getLogger(DefaultGenerator.class);
 
     protected Configuration configuration;
     protected List<CodeGenerationTask> codeGenerationTasks;
     protected InstatiatorService instatiatorService;
     protected GeneratorContext generatorContext;
 
-    public JavaGenerator() {
+    public DefaultGenerator() {
         this(null);
     }
 
-    public JavaGenerator(Configuration configuration) {
+    public DefaultGenerator(Configuration configuration) {
         this.generatorContext = new GeneratorContext();
         this.configuration = configuration != null ? configuration : Defaults.configuration();
         this.instatiatorService = new InstatiatorService(configuration);
@@ -81,6 +81,11 @@ public class JavaGenerator implements Generator {
                 // run table tasks
                 .forEach(table -> tasksBySupportedType(TableDefinition.class)
                         .forEach(task -> task.generate(table)));
+    }
+
+    @Override
+    public Configuration configuration() {
+        return configuration;
     }
 
     @SuppressWarnings("unchecked")

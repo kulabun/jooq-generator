@@ -3,10 +3,6 @@ package org.labun.jooq.codegen;
 import junit.framework.Assert;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
-import org.jooq.util.Database;
-import org.jooq.util.h2.H2Database;
-import org.jooq.util.jaxb.Catalog;
-import org.jooq.util.jaxb.Schema;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.labun.jooq.codegen.config.CodeGenerationConfig;
@@ -22,9 +18,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
@@ -39,19 +32,17 @@ public class GenerateTableTest {
 
     @Test
     public void shouldGenerateBaseStructure() throws Exception {
-        try (Connection connection = initConnection()) {
-            assertConnectionSuccess(connection);
+        Configuration config = createConfig();
+        config.database()
+                .username("sa")
+                .password("")
+                .driverClass("org.h2.Driver")
+                .dbMetaClass("org.jooq.util.h2.H2Database")
+                .jdbcUrl(createTestJdbcUrl())
+                .schemas(Arrays.asList(SCHEMA_NAME));
 
-            Configuration config = createConfig();
-            config.database().schemas(Arrays.asList(SCHEMA_NAME));
-
-            Database db = defaultH2Database();
-            db.setConnection(connection);
-
-            new JavaGenerator(config).generate(db);
-
-            validateGeneratedClasses(config);
-        }
+        GenerationTool.generate(new DefaultGenerator(config));
+        validateGeneratedClasses(config);
     }
 
     private void validateGeneratedClasses(Configuration config) throws IOException, URISyntaxException {
@@ -103,28 +94,12 @@ public class GenerateTableTest {
         return configuration;
     }
 
-    private Database defaultH2Database() {
-        Database db = new H2Database();
-        db.setConfiguredSchemata(Arrays.asList(new Schema().withInputSchema("")));
-        db.setConfiguredCatalogs(Arrays.asList(new Catalog().withInputCatalog("")));
-        db.setIncludes(new String[]{".*"});
-        db.setConfiguredCustomTypes(Arrays.asList());
-        db.setConfiguredEnumTypes(Arrays.asList());
-        db.setConfiguredForcedTypes(Arrays.asList());
-        return db;
-    }
-
-    private void assertConnectionSuccess(Connection connection) throws SQLException {
-        connection.createStatement().execute("SELECT 1");
-    }
-
     @SneakyThrows
-    private Connection initConnection() {
-        Class.forName("org.h2.Driver");
-
+    private String createTestJdbcUrl() {
         String initScript = this.getClass().getClassLoader().getResource("init.sql").getPath();
-        return DriverManager.getConnection("jdbc:h2:mem:test;INIT=RUNSCRIPT FROM '" + initScript + "' ", "sa", "");
+        return "jdbc:h2:mem:test;INIT=RUNSCRIPT FROM '" + initScript + "' ";
     }
+
 
     public String toCamelCase(String str) {
         return Arrays.stream(str.toLowerCase().split("_"))

@@ -14,7 +14,7 @@ import org.jooq.tools.reflect.ReflectException;
 import org.jooq.util.*;
 import org.jooq.util.h2.H2DataType;
 import org.labun.jooq.codegen.task.TaskContext;
-import org.labun.jooq.codegen.JavaGenerator;
+import org.labun.jooq.codegen.DefaultGenerator;
 
 import java.lang.reflect.Modifier;
 import java.lang.reflect.TypeVariable;
@@ -36,7 +36,7 @@ import static org.jooq.impl.DSL.name;
  * @author Konstantin Labun
  */
 public class DefaultSqlTypeResolver implements TypeResolver {
-    private static final JooqLogger LOG = JooqLogger.getLogger(JavaGenerator.class);
+    private static final JooqLogger LOG = JooqLogger.getLogger(DefaultGenerator.class);
 
     /**
      * [#4429] A map providing access to SQLDataType member literals
