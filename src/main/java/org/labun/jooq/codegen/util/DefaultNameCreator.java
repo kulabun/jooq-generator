@@ -30,6 +30,11 @@ public class DefaultNameCreator implements NameCreator, Configurable {
     }
 
     @Override
+    public String createFieldName(CodeGenerationConfig cfg, Definition column) {
+        return nameConverter.convert(column);
+    }
+
+    @Override
     public String createGetterName(CodeGenerationConfig cfg, Definition column) {
         NameConfig name = cfg.accessors().getters();
 

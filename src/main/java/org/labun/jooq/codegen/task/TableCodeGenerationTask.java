@@ -1,10 +1,10 @@
 package org.labun.jooq.codegen.task;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.apache.velocity.VelocityContext;
 import org.jooq.util.ColumnDefinition;
 import org.jooq.util.TableDefinition;
+import org.jooq.util.UniqueKeyDefinition;
 import org.labun.jooq.codegen.config.Defaults;
 import org.labun.jooq.codegen.config.Defaults.TemplateVariables;
 
@@ -26,12 +26,49 @@ public class TableCodeGenerationTask extends AbstractCodeGenerationTask<TableDef
 
         context.put(TemplateVariables.SCHEMA, table.getSchema());
         context.put(TemplateVariables.TABLE, table);
+        context.put(TemplateVariables.ID, getId(table));
+        context.put(TemplateVariables.UNIQ_KEYS, getUniqKeys(table));
         context.put(TemplateVariables.COLUMNS, getColumns(table));
         context.put(TemplateVariables.COLUMNS_CLASS_NAME, getClassName(table, getTaskContext(Defaults.GeneratorsNames.COLUMNS)));
         context.put(TemplateVariables.RECORD_CLASS_NAME, getClassName(table, getTaskContext(Defaults.GeneratorsNames.RECORD)));
         context.put(TemplateVariables.TABLE_CLASS_NAME, getClassName(table, getTaskContext(Defaults.GeneratorsNames.TABLE)));
 
         return context;
+    }
+
+    private List<UniqKey> getUniqKeys(TableDefinition table) {
+        return table.getUniqueKeys()
+                .stream()
+                .map(key -> toUniqKey(key))
+                .collect(Collectors.toList());
+    }
+
+    private UniqKey toUniqKey(UniqueKeyDefinition key) {
+        List<Column> columns = key.getKeyColumns().stream()
+                .map(it -> toColumn(it))
+                .collect(Collectors.toList());
+
+        return new UniqKey()
+                .name(key.getName())
+                .columns(columns);
+    }
+
+    private Id getId(TableDefinition table) {
+        List<Column> columns = table.getColumns().stream()
+                .filter(it -> it.isIdentity())
+                .map(it -> toColumn(it)
+                ).collect(Collectors.toList());
+        return (Id) new Id().columns(columns);
+    }
+
+    private Column toColumn(ColumnDefinition it) {
+        return new Column()
+                .name(it.getName())
+                .sqlType(resolveSqlType(it))
+                .javaName(resolveFieldName(it))
+                .javaType(resolveJavaType(it))
+                .setterName(resolveSetterName(it))
+                .getterName(resolveGetterName(it));
     }
 
     private String getClassName(TableDefinition table, TaskContext ctx) {
@@ -45,13 +82,7 @@ public class TableCodeGenerationTask extends AbstractCodeGenerationTask<TableDef
 
     private List<Column> getColumns(TableDefinition table) {
         return table.getColumns().stream()
-                .map(it ->
-                        new Column()
-                                .name(it.getName())
-                                .sqlType(resolveSqlType(it))
-                                .javaType(resolveJavaType(it))
-                                .setterName(resolveSetterName(it))
-                                .getterName(resolveGetterName(it))
+                .map(it -> toColumn(it)
                 ).collect(Collectors.toList());
     }
 
@@ -61,6 +92,10 @@ public class TableCodeGenerationTask extends AbstractCodeGenerationTask<TableDef
 
     private String resolveGetterName(ColumnDefinition columnDefinition) {
         return ctx.nameCreator().createGetterName(ctx.config(), columnDefinition);
+    }
+
+    private String resolveFieldName(ColumnDefinition it) {
+        return ctx.nameCreator().createFieldName(ctx.config(), it);
     }
 
     private String resolveSqlType(ColumnDefinition column) {
@@ -77,17 +112,21 @@ public class TableCodeGenerationTask extends AbstractCodeGenerationTask<TableDef
         return TableDefinition.class.isAssignableFrom(clazz);
     }
 
-    @Getter
-    @Setter
+    @Data
     public static class Column {
         private String name;
         private String sqlType;
+        private String javaName;
         private String javaType;
         private String setterName;
         private String getterName;
 
         public String getName() {
             return name;
+        }
+
+        public String getJavaName() {
+            return javaName;
         }
 
         public String getSqlType() {
@@ -105,5 +144,23 @@ public class TableCodeGenerationTask extends AbstractCodeGenerationTask<TableDef
         public String getGetterName() {
             return getterName;
         }
+    }
+
+    @Data
+    public static class UniqKey {
+        private String name;
+        private List<Column> columns;
+
+        public String getName() {
+            return name;
+        }
+
+        public List<Column> getColumns() {
+            return columns;
+        }
+    }
+
+    @Data
+    public static class Id extends UniqKey {
     }
 }

@@ -6,6 +6,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.jooq.util.Definition;
 import org.labun.jooq.codegen.config.Defaults;
+import org.labun.jooq.codegen.util.TemplateFunctions;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -38,6 +39,7 @@ public abstract class AbstractCodeGenerationTask<T extends Definition> implement
     protected VelocityContext configureContext(T t, VelocityContext context) {
         context.put(Defaults.TemplateVariables.PACKAGE, ctx.config().packageName());
         context.put(Defaults.TemplateVariables.CLASS_NAME, generateClassName(t));
+        context.put("util", TemplateFunctions.class);
         return context;
     }
 

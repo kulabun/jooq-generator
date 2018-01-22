@@ -9,6 +9,8 @@ import org.labun.jooq.codegen.config.CodeGenerationConfig;
 public interface NameCreator {
     String createClassName(CodeGenerationConfig cfg, Definition table);
 
+    String createFieldName(CodeGenerationConfig cfg, Definition column);
+
     String createGetterName(CodeGenerationConfig cfg, Definition column);
 
     String createSetterName(CodeGenerationConfig cfg, Definition column);
