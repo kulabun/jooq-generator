@@ -1,7 +1,7 @@
-package org.labun.jooq.codegen.util;
+package org.labun.jooq.generator.util;
 
 import lombok.SneakyThrows;
-import org.labun.jooq.codegen.config.Configuration;
+import org.labun.jooq.generator.config.Configuration;
 
 import java.util.HashMap;
 import java.util.Map;

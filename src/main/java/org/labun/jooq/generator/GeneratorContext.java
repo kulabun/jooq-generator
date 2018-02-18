@@ -1,9 +1,9 @@
-package org.labun.jooq.codegen;
+package org.labun.jooq.generator;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.labun.jooq.codegen.config.Configuration;
-import org.labun.jooq.codegen.task.TaskContext;
+import org.labun.jooq.generator.config.Configuration;
+import org.labun.jooq.generator.task.TaskContext;
 
 import java.util.ArrayList;
 import java.util.List;

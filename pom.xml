@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.labun.jooq.codegen</groupId>
-    <artifactId>generator</artifactId>
+    <groupId>org.labun.jooq</groupId>
+    <artifactId>code-generator</artifactId>
     <version>1.0</version>
 
     <properties>
@@ -36,7 +36,7 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/LabunORG/jooq-codegen-ng.git</url>
+        <url>https://github.com/LabunORG/jooq-generator.git</url>
     </scm>
 
     <distributionManagement>

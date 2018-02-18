@@ -1,7 +1,7 @@
-package org.labun.jooq.codegen.config;
+package org.labun.jooq.generator.config;
 
-import org.labun.jooq.codegen.task.SchemaCodeGenerationTask;
-import org.labun.jooq.codegen.task.TableCodeGenerationTask;
+import org.labun.jooq.generator.task.SchemaCodeGenerationTask;
+import org.labun.jooq.generator.task.TableCodeGenerationTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;

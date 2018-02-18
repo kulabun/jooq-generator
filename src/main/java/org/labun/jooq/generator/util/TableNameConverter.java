@@ -1,4 +1,4 @@
-package org.labun.jooq.codegen.util;
+package org.labun.jooq.generator.util;
 
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.util.Definition;

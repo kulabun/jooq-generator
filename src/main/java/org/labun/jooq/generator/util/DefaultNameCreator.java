@@ -1,12 +1,12 @@
-package org.labun.jooq.codegen.util;
+package org.labun.jooq.generator.util;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.StringUtils;
 import org.jooq.util.Definition;
-import org.labun.jooq.codegen.config.CodeGenerationConfig;
-import org.labun.jooq.codegen.config.Configuration;
-import org.labun.jooq.codegen.config.NameConfig;
+import org.labun.jooq.generator.config.CodeGenerationConfig;
+import org.labun.jooq.generator.config.Configuration;
+import org.labun.jooq.generator.config.NameConfig;
 
 /**
  * @author Konstantin Labun

@@ -1,4 +1,4 @@
-package org.labun.jooq.codegen;
+package org.labun.jooq.generator;
 
 import lombok.SneakyThrows;
 import org.apache.velocity.app.Velocity;
@@ -9,14 +9,14 @@ import org.jooq.util.Database;
 import org.jooq.util.Definition;
 import org.jooq.util.SchemaDefinition;
 import org.jooq.util.TableDefinition;
-import org.labun.jooq.codegen.config.CodeGenerationConfig;
-import org.labun.jooq.codegen.config.Configuration;
-import org.labun.jooq.codegen.config.Defaults;
-import org.labun.jooq.codegen.task.CodeGenerationTask;
-import org.labun.jooq.codegen.task.TaskContext;
-import org.labun.jooq.codegen.util.FilePathResolver;
-import org.labun.jooq.codegen.util.InstatiatorService;
-import org.labun.jooq.codegen.util.NameCreator;
+import org.labun.jooq.generator.config.CodeGenerationConfig;
+import org.labun.jooq.generator.config.Configuration;
+import org.labun.jooq.generator.config.Defaults;
+import org.labun.jooq.generator.task.CodeGenerationTask;
+import org.labun.jooq.generator.task.TaskContext;
+import org.labun.jooq.generator.util.FilePathResolver;
+import org.labun.jooq.generator.util.InstatiatorService;
+import org.labun.jooq.generator.util.NameCreator;
 
 import java.lang.reflect.Constructor;
 import java.util.List;

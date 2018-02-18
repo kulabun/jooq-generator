@@ -1,10 +1,10 @@
-package org.labun.jooq.codegen;
+package org.labun.jooq.generator;
 
 import lombok.SneakyThrows;
 import org.jooq.util.Database;
 import org.jooq.util.jaxb.Catalog;
 import org.jooq.util.jaxb.Schema;
-import org.labun.jooq.codegen.config.DatabaseConfig;
+import org.labun.jooq.generator.config.DatabaseConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

@@ -1,2 +1,2 @@
-# jooq-codegen-ng
-jooq-codegen-ng
+# jooq-code-generator
+jooq-code-generator

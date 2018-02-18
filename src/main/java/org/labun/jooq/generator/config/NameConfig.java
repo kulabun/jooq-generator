@@ -1,4 +1,4 @@
-package org.labun.jooq.codegen.config;
+package org.labun.jooq.generator.config;
 
 import lombok.Getter;
 import lombok.Setter;

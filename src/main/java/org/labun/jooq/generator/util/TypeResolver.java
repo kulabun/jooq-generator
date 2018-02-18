@@ -1,7 +1,7 @@
-package org.labun.jooq.codegen.util;
+package org.labun.jooq.generator.util;
 
 import org.jooq.util.ColumnDefinition;
-import org.labun.jooq.codegen.task.TaskContext;
+import org.labun.jooq.generator.task.TaskContext;
 
 /**
  * @author Konstantin Labun

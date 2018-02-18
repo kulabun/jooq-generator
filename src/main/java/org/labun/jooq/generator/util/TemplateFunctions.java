@@ -1,6 +1,6 @@
-package org.labun.jooq.codegen.util;
+package org.labun.jooq.generator.util;
 
-import org.labun.jooq.codegen.task.TableCodeGenerationTask;
+import org.labun.jooq.generator.task.TableCodeGenerationTask;
 
 import java.util.Arrays;
 import java.util.List;

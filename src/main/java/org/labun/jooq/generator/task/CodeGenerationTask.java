@@ -1,4 +1,4 @@
-package org.labun.jooq.codegen.task;
+package org.labun.jooq.generator.task;
 
 import org.jooq.util.Definition;
 

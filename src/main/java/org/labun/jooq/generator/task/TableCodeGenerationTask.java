@@ -1,12 +1,12 @@
-package org.labun.jooq.codegen.task;
+package org.labun.jooq.generator.task;
 
 import lombok.Data;
 import org.apache.velocity.VelocityContext;
 import org.jooq.util.ColumnDefinition;
 import org.jooq.util.TableDefinition;
 import org.jooq.util.UniqueKeyDefinition;
-import org.labun.jooq.codegen.config.Defaults;
-import org.labun.jooq.codegen.config.Defaults.TemplateVariables;
+import org.labun.jooq.generator.config.Defaults;
+import org.labun.jooq.generator.config.Defaults.TemplateVariables;
 
 import java.util.List;
 import java.util.stream.Collectors;

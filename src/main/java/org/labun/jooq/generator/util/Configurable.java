@@ -1,7 +1,7 @@
-package org.labun.jooq.codegen.util;
+package org.labun.jooq.generator.util;
 
 
-import org.labun.jooq.codegen.config.Configuration;
+import org.labun.jooq.generator.config.Configuration;
 
 /**
  * @author Konstantin Labun

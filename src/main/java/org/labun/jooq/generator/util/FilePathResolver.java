@@ -1,6 +1,6 @@
-package org.labun.jooq.codegen.util;
+package org.labun.jooq.generator.util;
 
-import org.labun.jooq.codegen.config.CodeGenerationConfig;
+import org.labun.jooq.generator.config.CodeGenerationConfig;
 
 import java.io.File;
 import java.nio.file.Path;

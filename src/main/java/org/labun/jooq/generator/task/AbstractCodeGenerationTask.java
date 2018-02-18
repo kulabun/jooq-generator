@@ -1,12 +1,12 @@
-package org.labun.jooq.codegen.task;
+package org.labun.jooq.generator.task;
 
 import lombok.SneakyThrows;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.jooq.util.Definition;
-import org.labun.jooq.codegen.config.Defaults;
-import org.labun.jooq.codegen.util.TemplateFunctions;
+import org.labun.jooq.generator.config.Defaults;
+import org.labun.jooq.generator.util.TemplateFunctions;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

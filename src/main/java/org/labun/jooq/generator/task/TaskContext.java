@@ -1,12 +1,12 @@
-package org.labun.jooq.codegen.task;
+package org.labun.jooq.generator.task;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.labun.jooq.codegen.GeneratorContext;
-import org.labun.jooq.codegen.config.CodeGenerationConfig;
-import org.labun.jooq.codegen.util.FilePathResolver;
-import org.labun.jooq.codegen.util.NameCreator;
-import org.labun.jooq.codegen.util.TypeResolver;
+import org.labun.jooq.generator.GeneratorContext;
+import org.labun.jooq.generator.config.CodeGenerationConfig;
+import org.labun.jooq.generator.util.FilePathResolver;
+import org.labun.jooq.generator.util.NameCreator;
+import org.labun.jooq.generator.util.TypeResolver;
 
 /**
  * @author Konstantin Labun

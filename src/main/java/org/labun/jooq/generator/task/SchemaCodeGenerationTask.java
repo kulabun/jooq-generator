@@ -1,9 +1,8 @@
-package org.labun.jooq.codegen.task;
+package org.labun.jooq.generator.task;
 
 import org.apache.velocity.VelocityContext;
 import org.jooq.util.SchemaDefinition;
-import org.jooq.util.TableDefinition;
-import org.labun.jooq.codegen.config.Defaults;
+import org.labun.jooq.generator.config.Defaults;
 
 /**
  * @author Konstantin Labun

@@ -1,11 +1,11 @@
-package org.labun.jooq.codegen.config;
+package org.labun.jooq.generator.config;
 
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
-import org.labun.jooq.codegen.util.DefaultJavaTypeResolver;
-import org.labun.jooq.codegen.util.DefaultNameCreator;
-import org.labun.jooq.codegen.util.DefaultSqlTypeResolver;
+import org.labun.jooq.generator.util.DefaultJavaTypeResolver;
+import org.labun.jooq.generator.util.DefaultNameCreator;
+import org.labun.jooq.generator.util.DefaultSqlTypeResolver;
 
 /**
  * @author Konstantin Labun
