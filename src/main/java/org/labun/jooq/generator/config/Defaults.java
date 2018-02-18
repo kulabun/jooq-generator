@@ -51,7 +51,7 @@ public class Defaults {
             return new CodeGenerationConfig()
                     .codeGenerationTask(SchemaCodeGenerationTask.class.getCanonicalName())
                     .generatorName(GeneratorsNames.SCHEMA)
-                    .packageName("org.labun.jooq.codegen")
+                    .packageName("org.labun.jooq.generator")
                     .className(new NameConfig())
                     .template("templates/java/schema.vm");
         }
@@ -60,7 +60,7 @@ public class Defaults {
             return new CodeGenerationConfig()
                     .codeGenerationTask(TableCodeGenerationTask.class.getCanonicalName())
                     .generatorName(GeneratorsNames.COLUMNS)
-                    .packageName("org.labun.jooq.codegen.column")
+                    .packageName("org.labun.jooq.generator.column")
                     .className(new NameConfig().postfix("Columns"))
                     .template("templates/java/columns.vm")
                     .javaTimeDates(true);
@@ -70,7 +70,7 @@ public class Defaults {
             return new CodeGenerationConfig()
                     .codeGenerationTask(TableCodeGenerationTask.class.getCanonicalName())
                     .generatorName(GeneratorsNames.RECORD)
-                    .packageName("org.labun.jooq.codegen.record")
+                    .packageName("org.labun.jooq.generator.record")
                     .className(new NameConfig().postfix("Record"))
                     .template("templates/java/record.vm")
                     .javaTimeDates(true);
@@ -80,7 +80,7 @@ public class Defaults {
             return new CodeGenerationConfig()
                     .codeGenerationTask(TableCodeGenerationTask.class.getCanonicalName())
                     .generatorName(GeneratorsNames.TABLE)
-                    .packageName("org.labun.jooq.codegen.table")
+                    .packageName("org.labun.jooq.generator.table")
                     .className(new NameConfig().postfix("Table"))
                     .template("templates/java/table.vm")
                     .javaTimeDates(true);
@@ -90,7 +90,7 @@ public class Defaults {
             return new CodeGenerationConfig()
                     .codeGenerationTask(TableCodeGenerationTask.class.getCanonicalName())
                     .generatorName(GeneratorsNames.REPOSITORY)
-                    .packageName("org.labun.jooq.codegen.repository")
+                    .packageName("org.labun.jooq.generator.repository")
                     .className(new NameConfig().postfix("RepositoryBase"))
                     .template("templates/java/repository.vm")
                     .javaTimeDates(true);

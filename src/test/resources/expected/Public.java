@@ -1,4 +1,4 @@
-package org.labun.jooq.codegen;
+package org.labun.jooq.generator;
 
 
 import javax.annotation.Generated;

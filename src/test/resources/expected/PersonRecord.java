@@ -1,4 +1,4 @@
-package org.labun.jooq.codegen.record;
+package org.labun.jooq.generator.record;
 
 import org.jooq.impl.UpdatableRecordImpl;
 

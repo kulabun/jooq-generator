@@ -1,4 +1,4 @@
-package org.labun.jooq.codegen.repository;
+package org.labun.jooq.generator.repository;
 
 import org.jooq.Condition;
 import org.jooq.DSLContext;

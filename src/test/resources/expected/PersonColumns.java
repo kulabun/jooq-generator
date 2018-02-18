@@ -1,4 +1,4 @@
-package org.labun.jooq.codegen.column;
+package org.labun.jooq.generator.column;
 
 import javax.annotation.Generated;
 

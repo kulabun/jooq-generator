@@ -1,4 +1,4 @@
-package org.labun.jooq.codegen.table;
+package org.labun.jooq.generator.table;
 
 import org.jooq.Field;
 import org.jooq.Table;
