@@ -23,6 +23,7 @@
 *.rar
 
 build/
+target/
 out/
 .gradle
 
