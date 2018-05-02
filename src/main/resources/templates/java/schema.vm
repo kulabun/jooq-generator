@@ -1,9 +1,15 @@
 package $package;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.Generated;
 
 import org.jooq.Catalog;
+import org.jooq.Sequence;
+import org.jooq.Table;
 import org.jooq.impl.SchemaImpl;
 
 
@@ -14,15 +20,53 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({"all", "unchecked", "rawtypes"})
 public class $className extends SchemaImpl {
 
-    /**
-     * The reference instance of <code>$schema.name</code>
-     */
-    public static final $className ${schema.name.toUpperCase()} = new ${className}();
+  /**
+  * The reference instance of <code>$schema.name</code>
+  */
+  public static final $className ${schema.name.toUpperCase()} = new ${className}();
 
-    /**
-     * No further instances allowed
-     */
-    private ${className}() {
-        super("${schema.name.toUpperCase()}", null);
-    }
+  /**
+  * No further instances allowed
+  */
+  private ${className}() {
+    super("${schema.name.toUpperCase()}", null);
+  }
+
+#foreach( $table in $schema.tables )
+  /**
+  * The table <code>${schema.name.toUpperCase()}.${table.name.toUpperCase()}</code>.
+  */
+  public final ${table.canonicalTableClassName} ${table.name.toUpperCase()} = ${table.canonicalTableClassName}.${table.name.toUpperCase()};
+
+#end
+
+  /**
+  * {@inheritDoc}
+  */
+  @Override
+  public Catalog getCatalog() {
+    return ${schema.catalog.canonicalCatalogClassName}.INSTANCE;
+  }
+
+  @Override
+  public final List<Sequence<?>> getSequences() {
+    List result = new ArrayList();
+    result.addAll(getSequences0());
+    return result;
+  }
+
+  private final List<Sequence<?>> getSequences0() {
+    return Arrays.<Sequence<?>>asList(#foreach( $sequence in $schema.sequences )${schema.canonicalSequencesClassName}.${sequence.name.toUpperCase()}#if( $foreach.hasNext ), #end#end);
+  }
+
+  @Override
+  public final List<Table<?>> getTables() {
+    List result = new ArrayList();
+    result.addAll(getTables0());
+    return result;
+  }
+
+  private final List<Table<?>> getTables0() {
+    return Arrays.<Table<?>>asList(#foreach( $table in $schema.tables )${table.name.toUpperCase()}#if( $foreach.hasNext ), #end#end);
+  }
 }

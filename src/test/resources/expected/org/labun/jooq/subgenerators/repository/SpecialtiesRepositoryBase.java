@@ -1,4 +1,4 @@
-package $package;
+package org.labun.jooq.subgenerators.repository;
 
 import org.jooq.Condition;
 import org.jooq.DSLContext;
@@ -24,18 +24,18 @@ import java.util.stream.StreamSupport;
 */
 @Generated({"jooq-generator:"})
 @SuppressWarnings({"all", "unchecked", "rawtypes"})
-public class $className {
-    protected final ${table.canonicalTableClassName} table = ${table.canonicalTableClassName}.${table.name.toUpperCase()};
+public class SpecialtiesRepositoryBase {
+    protected final org.labun.jooq.subgenerators.table.SpecialtiesTable table = org.labun.jooq.subgenerators.table.SpecialtiesTable.SPECIALTIES;
     protected final DSLContext jooq;
     private final Map<String, Field> pkFieldsMap;
 
-    public $className(DSLContext dslContext) {
+    public SpecialtiesRepositoryBase(DSLContext dslContext) {
         this.jooq = dslContext;
         this.pkFieldsMap = getPKFieldsMap();
     }
 
     public boolean isFor(Table table) {
-        return table != null && ${table.canonicalTableClassName}.class.isAssignableFrom(table.getClass());
+        return table != null && org.labun.jooq.subgenerators.table.SpecialtiesTable.class.isAssignableFrom(table.getClass());
     }
 
     public <RET> List<RET> findAll(Class<RET> clazz) {
@@ -53,7 +53,7 @@ public class $className {
     public int delete(Iterable<Object> entities) {
         if (entities == null) return 0;
 
-        List<${table.canonicalRecordClassName}> records = StreamSupport.stream(entities.spliterator(), false)
+        List<org.labun.jooq.subgenerators.record.SpecialtiesRecord> records = StreamSupport.stream(entities.spliterator(), false)
                 .map(it -> toRecord(it))
                 .collect(Collectors.toList());
 
@@ -70,7 +70,7 @@ public class $className {
     }
 
     public <T> T save(T entity) {
-        ${table.canonicalRecordClassName} record = toRecord(entity);
+        org.labun.jooq.subgenerators.record.SpecialtiesRecord record = toRecord(entity);
         record.store();
         return record.into(entity);
     }
@@ -78,7 +78,7 @@ public class $className {
     public <T> Iterable<T> save(Iterable<T> entities) {
         if (entities == null) return Collections.emptyList();
 
-        List<${table.canonicalRecordClassName}> records = StreamSupport.stream(entities.spliterator(), false)
+        List<org.labun.jooq.subgenerators.record.SpecialtiesRecord> records = StreamSupport.stream(entities.spliterator(), false)
                 .map(it -> toRecord(it))
                 .collect(Collectors.toList());
 
@@ -87,25 +87,25 @@ public class $className {
         return applyRecordsToEntities(entities, records);
     }
 
-    private ${table.canonicalRecordClassName} toRecord(Object entity) {
+    private org.labun.jooq.subgenerators.record.SpecialtiesRecord toRecord(Object entity) {
         Map<Field, Object> id = getId(entity);
         if (id.values().stream().anyMatch(it -> it == null))
             return insertRecord(entity);
         return updateRecord(id, entity);
     }
 
-    private ${table.canonicalRecordClassName} updateRecord(Map<Field, Object> id, Object entity) {
+    private org.labun.jooq.subgenerators.record.SpecialtiesRecord updateRecord(Map<Field, Object> id, Object entity) {
         return fetchLockedById(id)
                 .map(it -> applyFrom(it, entity))
                 .orElse(null);
     }
 
-    private ${table.canonicalRecordClassName} applyFrom(${table.canonicalRecordClassName} row, Object update) {
+    private org.labun.jooq.subgenerators.record.SpecialtiesRecord applyFrom(org.labun.jooq.subgenerators.record.SpecialtiesRecord row, Object update) {
         row.from(update);
         return row;
     }
 
-    private ${table.canonicalRecordClassName} insertRecord(Object entity) {
+    private org.labun.jooq.subgenerators.record.SpecialtiesRecord insertRecord(Object entity) {
         return jooq.newRecord(table, entity);
     }
 
@@ -141,25 +141,25 @@ public class $className {
         }
     }
 
-    private <T> List<T> applyRecordsToEntities(Iterable<T> entities, List<${table.canonicalRecordClassName}> records) {
+    private <T> List<T> applyRecordsToEntities(Iterable<T> entities, List<org.labun.jooq.subgenerators.record.SpecialtiesRecord> records) {
         List<T> result = new ArrayList<>();
         Iterator<T> entitiesIterator = entities.iterator();
-        Iterator<${table.canonicalRecordClassName}> recordsIterator = records.iterator();
+        Iterator<org.labun.jooq.subgenerators.record.SpecialtiesRecord> recordsIterator = records.iterator();
         while (entitiesIterator.hasNext() && recordsIterator.hasNext()) {
-            ${table.canonicalRecordClassName} record = recordsIterator.next();
+            org.labun.jooq.subgenerators.record.SpecialtiesRecord record = recordsIterator.next();
             T entity = entitiesIterator.next();
             result.add(record.into(entity));
         }
         return result;
     }
 
-    private List<TableField<${table.canonicalRecordClassName}, ?>> pk() {
-        UniqueKey<${table.canonicalRecordClassName}> key = table.getPrimaryKey();
+    private List<TableField<org.labun.jooq.subgenerators.record.SpecialtiesRecord, ?>> pk() {
+        UniqueKey<org.labun.jooq.subgenerators.record.SpecialtiesRecord> key = table.getPrimaryKey();
         if (key == null) throw new IllegalStateException("no pk found");
         return key.getFields();
     }
 
-    protected Optional<${table.canonicalRecordClassName}> fetchById(Map<Field, Object> id) {
+    protected Optional<org.labun.jooq.subgenerators.record.SpecialtiesRecord> fetchById(Map<Field, Object> id) {
         return buildCondition(id)
                 .map(condition ->
                         jooq.selectFrom(table)
@@ -173,7 +173,7 @@ public class $className {
                 .reduce(Condition::and);
     }
 
-    protected Optional<${table.canonicalRecordClassName}> fetchLockedById(Map<Field, Object> id) {
+    protected Optional<org.labun.jooq.subgenerators.record.SpecialtiesRecord> fetchLockedById(Map<Field, Object> id) {
         return buildCondition(id)
                 .map(condition ->
                         jooq.selectFrom(table)
@@ -188,54 +188,4 @@ public class $className {
         }
     }
 
-#macro( forUpdate $needLock )
-    #if( $needLock )
-            .forUpdate()
-    #end
-#end
-#macro( findByUniqKeyColumn $column $varName $needLock)
-    #set( $action = ${util.conditional($needLock, "lock", "find")} )
-    public <RET> Optional<RET> ${action}By${column.javaName}($column.javaType $varName, Class<RET> clazz) {
-        RET result = jooq.selectFrom(table)
-            .where(table.${column.name.toUpperCase()}.eq($varName))
-    #forUpdate($needLock)
-            .fetchOneInto(clazz);
-        return Optional.ofNullable(result);
-    }
-
-#end
-#macro( findByColumn $column $varName $needLock)
-    #set( $action = ${util.conditional($needLock, "lock", "find")} )
-    public <RET> List<RET> ${action}By${column.javaName}($column.javaType $varName, Class<RET> clazz) {
-        return jooq.selectFrom(table)
-            .where(table.${column.name.toUpperCase()}.eq($varName))
-    #forUpdate($needLock)
-            .fetchInto(clazz);
-    }
-
-#end
-#macro( findByColumnIn $column $varName $needLock)
-    #set( $action = ${util.conditional($needLock, "lock", "find")} )
-    public <RET> List<RET> ${action}By${column.javaName}In(List<$column.javaType> $varName, Class<RET> clazz) {
-        return jooq.selectFrom(table)
-            .where(table.${column.name.toUpperCase()}.in($varName))
-    #forUpdate($needLock)
-            .fetchInto(clazz);
-    }
-
-#end
-#foreach( $column in $columns )
-    #set( $varName = ${util.decapitalize($column.javaName)} )
-    #if ( ${util.isSearchable($column)} )
-        #if ( $util.isUniqKey($uniqKeys, $column) )
-            #findByUniqKeyColumn($column, $varName, false)
-            #findByUniqKeyColumn($column, $varName, true)
-        #else
-            #findByColumn($column, $varName, false)
-            #findByColumn($column, $varName, true)
-        #end
-        #findByColumnIn($column, $varName, false)
-        #findByColumnIn($column, $varName, true)
-    #end
-#end
 }
