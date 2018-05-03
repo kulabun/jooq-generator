@@ -1,7 +1,5 @@
 package org.labun.jooq.generator.util
 
-import lombok.Getter
-import lombok.Setter
 import org.apache.commons.lang3.StringUtils
 import org.jooq.util.Definition
 import org.labun.jooq.generator.config.SubGeneratorConfig
@@ -10,8 +8,6 @@ import org.labun.jooq.generator.config.Configuration
 /**
  * @author Konstantin Labun
  */
-@Getter
-@Setter
 class DefaultNameCreator : NameCreator, Configurable {
 
   private val nameConverter = TableNameConverter()
