@@ -1,0 +1,131 @@
+import java.text.SimpleDateFormat
+
+apply plugin: 'maven-publish'
+apply plugin: 'maven'
+apply plugin: 'signing'
+apply plugin: 'io.codearte.nexus-staging'
+
+nexusStaging {
+    packageGroup project.group
+    username sonatypeUsername
+    password sonatypePassword
+}
+
+Date buildTimeAndDate = new Date()
+ext {
+    buildTime = new SimpleDateFormat('yyyy-MM-dd').format(buildTimeAndDate)
+    buildDate = new SimpleDateFormat('HH:mm:ss.SSSZ').format(buildTimeAndDate)
+}
+
+jar {
+    manifest {
+        attributes(
+                'Build-Date': project.buildTime,
+                'Build-Time': project.buildDate,
+                'Specification-Title': project.name,
+                'Specification-Version': project.version,
+        )
+    }
+}
+
+javadoc {
+    failOnError false
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from 'build/docs/javadoc'
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        //Check for the latest version here: http://plugins.gradle.org/plugin/com.jfrog.artifactory
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:3.0.3"
+    }
+}
+
+signing {
+    required { gradle.taskGraph.hasTask("uploadArchives") }
+    sign configurations.archives
+}
+
+publishing {
+    publications {
+        mavenCustom(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+
+            groupId project.group
+            artifactId project.name
+            version project.version
+        }
+    }
+}
+
+// ./gradlew uploadArchives (upload snapshot to Maven Central's snapshot repo)
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots") {
+                authentication(userName: sonatypeUsername, password: sonatypePassword)
+            }
+            pom {
+                version = project.version
+                artifactId = project.name
+                groupId = project.group
+                project {
+                    name project.name
+                    description project.description
+                    url 'https://github.com/LabunORG/jooq-generator'
+                    scm {
+                        url "https://github.com/LabunORG/jooq-generator.git"
+                        connection "scm:git:https://github.com/LabunORG/jooq-generator.git"
+                        developerConnection "scm:git:git@github.com:LabunORG/jooq-generator.git"
+                    }
+                    licenses {
+                        license {
+                            name 'Apache License, Version 2.0'
+                            url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                            distribution 'repo'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id 'kulabun'
+                            name 'Konstantin Labun'
+                            email 'konstantin.labun@gmail.com'
+                            url 'https://labun.me'
+                            timezone '+3'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+uploadArchives.doLast {
+    if (!version.contains("SNAPSHOT")) {
+        println("Now go to https://oss.sonatype.org/index.html#stagingRepositories to close" +
+                " and publish the distribution")
+    }
+}
