@@ -13,7 +13,7 @@ import java.util.*
  */
 object GenerationTool {
 
-  fun generate(generator: Generator) {
+  @JvmStatic fun generate(generator: Generator) {
     val db = generator.configuration.database
     Class.forName(db.driverClass)
 

@@ -13,7 +13,7 @@ import org.labun.jooq.generator.task.TableSubGenerator
  */
 object Defaults {
 
-  fun defaultConfiguration(): Configuration {
+  @JvmStatic fun defaultConfiguration(): Configuration {
     return Configuration(
         subGenerators = listOf(
             CodeGenerationConfigs.CATALOG_GENERATION_CONFIG,
@@ -127,7 +127,7 @@ object Defaults {
       )
     }
 
-    fun all(): List<SubGeneratorConfig> = listOf(
+    @JvmStatic fun all(): List<SubGeneratorConfig> = listOf(
         schemaGenerationConfig(),
         sequenceGenerationConfig(),
         indexesGenerationConfig(),
