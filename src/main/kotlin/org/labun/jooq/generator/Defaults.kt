@@ -137,6 +137,16 @@ object Defaults {
         columnsGenerationConfig(),
         repositoryGenerationConfig(),
         catalogGenerationConfig())
+
+    @JvmStatic fun base(): List<SubGeneratorConfig> = listOf(
+        schemaGenerationConfig(),
+        sequenceGenerationConfig(),
+        indexesGenerationConfig(),
+        keysGenerationConfig(),
+        tableGenerationConfig(),
+        recordGenerationConfig(),
+        columnsGenerationConfig(),
+        catalogGenerationConfig())
   }
 
 }
